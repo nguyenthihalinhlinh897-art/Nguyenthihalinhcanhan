@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hub</title>
+    <style>
+        /* Hiệu ứng background chuyển động */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Khung nội tuyến (Iframe) */
+        .web-frame {
+            width: 100%;
+            height: 500px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: white;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Nút bấm liên kết */
+        .btn-link {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-link:hover {
+            background: #fff;
+            color: #e73c7e;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        h1 { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        p { margin-bottom: 20px; opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to My World</h1>
+        <p>Xem trực tiếp trang cá nhân của mình bên dưới</p>
+
+        <div class="web-frame">
+            <iframe src="https://canhan.oneapp.dev/" title="Trang Cá Nhân"></iframe>
+        </div>
+
+        <p>Hoặc khám phá không gian nghệ thuật tại đây:</p>
+        
+        <a href="https://nguyenthihalinhlinh897-art.github.io/Myselfhahahahaha/" class="btn-link" target="_blank">
+            🎨 Ghé thăm Myselfhahahahaha
+        </a>
+    </div>
+
+</body>
+</html>
