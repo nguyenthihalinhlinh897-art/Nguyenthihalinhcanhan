@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Hub</title>
+    <title>My Hub - Moon Space</title>
     <style>
-        /* Hiệu ứng background chuyển động */
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            color: white;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; color: white; overflow-x: hidden;
         }
 
         @keyframes gradient {
@@ -26,74 +21,84 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Hiệu ứng trăng rơi */
+        .moon {
+            position: fixed; top: -10%;
+            color: rgba(255, 255, 255, 0.8);
+            user-select: none; z-index: 1000;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
         .container {
-            width: 90%;
-            max-width: 1000px;
-            text-align: center;
-            padding: 20px;
+            width: 100%; max-width: 1000px;
+            text-align: center; padding: 5px; z-index: 2;
         }
 
-        /* Khung nội tuyến (Iframe) */
-        .web-frame {
-            width: 100%;
-            height: 500px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        /* KHUNG NGOẠI TUYẾN - FIX LỖI THỌT LỎN */
+        .web-frame-wrapper {
+            width: 92%;
+            height: 78vh; /* Chiều cao vừa đủ để không che mất nút */
+            margin: 10px auto;
+            border: 3px solid rgba(255, 255, 255, 0.7);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             background: white;
-            margin-bottom: 30px;
             overflow: hidden;
+            position: relative;
         }
 
+        /* Kỹ thuật Hack: Ép Iframe hiểu là màn hình rộng hơn để bung nội dung */
         iframe {
-            width: 100%;
-            height: 100%;
+            width: 150%; /* Ép rộng ra 150% */
+            height: 150%; 
             border: none;
+            transform: scale(0.666); /* Thu nhỏ tỉ lệ hiển thị lại (1/1.5) để vừa khung */
+            transform-origin: 0 0;
+            position: absolute;
+            top: 0; left: 0;
         }
 
-        /* Nút bấm liên kết */
         .btn-link {
-            display: inline-block;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
+            display: inline-block; padding: 12px 60px;
+            font-size: 18px; font-weight: bold; color: #fff;
             background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #fff;
-            border-radius: 50px;
-            text-decoration: none;
-            backdrop-filter: blur(5px);
+            border: 2px solid #fff; border-radius: 50px;
+            text-decoration: none; backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
-
-        .btn-link:hover {
-            background: #fff;
-            color: #e73c7e;
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        h1 { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        p { margin-bottom: 20px; opacity: 0.9; }
+        .btn-link:hover { background: #fff; color: #e73c7e; transform: scale(1.05); }
+        h1 { font-size: 1.4rem; margin: 10px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
-
+    <div id="moon-container"></div>
     <div class="container">
-        <h1>Welcome to My World</h1>
-        <p>Xem trực tiếp trang cá nhân của mình bên dưới</p>
-
-        <div class="web-frame">
-            <iframe src="https://canhan.oneapp.dev/" title="Trang Cá Nhân"></iframe>
+        <h1>🌙 Moonlit Space 🌕</h1>
+        <div class="web-frame-wrapper">
+            <iframe src="https://canhan.oneapp.dev/"></iframe>
         </div>
-
-        <p>Hoặc khám phá không gian nghệ thuật tại đây:</p>
-        
         <a href="https://nguyenthihalinhlinh897-art.github.io/Myselfhahahahaha/" class="btn-link" target="_blank">
-            🎨 Ghé thăm Myselfhahahahaha
+            ✨ Chi tiết
         </a>
     </div>
 
+    <script>
+        function createMoon() {
+            const moon = document.createElement('div');
+            moon.classList.add('moon');
+            const types = ['🌙', '🌕', '🌛'];
+            moon.innerText = types[Math.floor(Math.random() * types.length)];
+            moon.style.left = Math.random() * 100 + 'vw';
+            moon.style.animationDuration = Math.random() * 3 + 5 + 's';
+            moon.style.opacity = Math.random() * 0.5 + 0.5;
+            moon.style.fontSize = Math.random() * 10 + 15 + 'px';
+            document.getElementById('moon-container').appendChild(moon);
+            setTimeout(() => moon.remove(), 8000);
+        }
+        setInterval(createMoon, 500);
+    </script>
 </body>
 </html>
